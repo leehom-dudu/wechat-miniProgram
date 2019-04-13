@@ -195,7 +195,7 @@
     ```
     
     **header-custom.json**
-    ```json
+    ```javascript
       {
         "component": true,//声明自定义组件
         "usingComponents": {}
