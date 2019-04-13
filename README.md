@@ -201,4 +201,53 @@
       }
     ```  
     
-> #### 2 全局按钮点击手机震动反馈
+> #### 2 全局按钮点击手机震动反馈  
+* 创建工具函数JS文件，`utils.js` 文件，并写好震动反馈方法`shake`；
+* 利用 `bindtap` 事件 `冒泡` 的属性，在 `wxml` 最外层元素上监听 `点击的元素` ，根据 `data-shake` 自定义属性判断该元素是否需要震动反馈；
+* 在文件中引入工具函数中的 `shake` 方法； 
+
+    **utils.js**
+    ```javascript
+    // 震动反馈
+    const shake = () =>{
+      wx.vibrateLong({
+        success: () => {
+          console.log("反馈成功！")
+        },
+        fail: () => {
+          console.log("反馈失败！")
+        },
+        success: () => {
+          console.log("反馈完成！")
+        },
+      })
+    };
+    //暴露方法
+    module.exports = {
+      shake: shake
+    };
+    ```
+    
+    **demo.js**
+    ```javascript
+    // 引入工具函数文件
+    const tls = require('../../utils.js');
+    Page({
+      /**
+       * 监听点击事件,给与震动反馈；
+       */
+      listenTap(e){e.target.dataset.shake ? tls.shake():""}
+    })
+    ```
+    
+    **demo.wxml**
+    ```html
+    <!--通过listenTap方法监听元素是否有data-shake自定义属性-->
+    <view class="orderNow" bindtap="listenTap">
+        <button data-shake='true' class="cu-btn block bg-orange margin-tb-sm lg round " bindtap='addAddr'>
+          <text class="icon-roundaddfill margin-right-lg"></text> 添加地址
+        </button>
+      </view>
+    </scroll-view>
+    ```
+ 
