@@ -1,5 +1,5 @@
 # wechat-miniProgram
-> #####record some methods
+> ##### record some methods
 
-######1.沉浸式头部设计
+###### 1.沉浸式头部设计
 
